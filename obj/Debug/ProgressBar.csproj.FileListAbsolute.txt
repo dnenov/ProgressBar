@@ -1,0 +1,7 @@
+c:\users\deyan nenov\documents\visual studio 2015\Projects\ProgressBar\ProgressBar\bin\Debug\ProgressBar.dll
+c:\users\deyan nenov\documents\visual studio 2015\Projects\ProgressBar\ProgressBar\bin\Debug\ProgressBar.pdb
+c:\users\deyan nenov\documents\visual studio 2015\Projects\ProgressBar\ProgressBar\obj\Debug\ProgressBar.csprojResolveAssemblyReference.cache
+c:\users\deyan nenov\documents\visual studio 2015\Projects\ProgressBar\ProgressBar\obj\Debug\AdnRme.ProgressForm.resources
+c:\users\deyan nenov\documents\visual studio 2015\Projects\ProgressBar\ProgressBar\obj\Debug\ProgressBar.csproj.GenerateResource.Cache
+c:\users\deyan nenov\documents\visual studio 2015\Projects\ProgressBar\ProgressBar\obj\Debug\ProgressBar.dll
+c:\users\deyan nenov\documents\visual studio 2015\Projects\ProgressBar\ProgressBar\obj\Debug\ProgressBar.pdb
