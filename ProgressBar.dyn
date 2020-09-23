@@ -1,0 +1,245 @@
+{
+  "Uuid": "e57dc831-c5f6-4142-815c-a9f9b0f81201",
+  "IsCustomNode": false,
+  "Description": null,
+  "Name": "ProgressBar",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# @didonenov\r\n# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n# Add reference to the ProgressBar.dll \r\npath = IN[0]\r\nclr.AddReferenceToFileAndPath(path)\r\nfrom AdnRme import ProgressForm\r\n\r\nrooms = IN[1]\r\nresult = []\r\niterations = len(rooms)\t#T his is the counter for the ProgessBar\r\n\r\n# Implementation\r\ndef Main():\r\n\twith ProgressForm('Message you want to display', 'Processing {0} elements ...', iterations) as form:\r\n\t\tfor room in rooms:\r\n\t\t\tpass\r\n\t\t\tif form.getAbortFlag():\t# The user can Cancel the execution of the long process\r\n\t\t\t\treturn 'Aborted by user.\\n(Freeze/Run/Unfreeze node to proceed)'\r\n\t\tform.Increment()\r\n\r\nmessage = Main()\r\n\r\n# If we failed to run the process, report\r\nif message:\r\n\tOUT = message\r\nelse:\r\n\tOUT = 'Successfully populated %s elements' % str(iterations)\r\nOUT = 0",
+      "VariableInputPorts": true,
+      "Id": "e6ee9af23e4247f39fbd35d82b2ed3bf",
+      "Inputs": [
+        {
+          "Id": "ee5415f7d4644d3297227c6d92a391fb",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "a664162becbd4f2ab3a24f4bf8a2d09c",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b56c369cfe904243b50ad8f9f7c156d2",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
+      "HintPath": "P:\\Shared\\Archilizer\\Projects\\Blog\\200923 ProgressBar\\ProgressBar.dll",
+      "InputValue": ".\\ProgressBar.dll",
+      "NodeType": "ExtensionNode",
+      "Id": "23f445203efa4454aab452b45c2785a5",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "baaebb48a5ef494aa517cdb97188eedc",
+          "Name": "",
+          "Description": "Filename",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows you to select a file on the system to get its filename"
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.Categories, DSRevitNodesUI",
+      "SelectedIndex": 428,
+      "SelectedString": "OST_Rooms",
+      "NodeType": "ExtensionNode",
+      "Id": "d4b5f46a91b44b0c9ede78c72e9a8a72",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "300ab253afe4424183b2a9369fc304cc",
+          "Name": "Category",
+          "Description": "The selected Category.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "All built-in categories."
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.ElementsOfCategory, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "Id": "068498f825504cdc9f65f23bb52fbe73",
+      "Inputs": [
+        {
+          "Id": "08a1abb56fc947fca78624c2aadbcd15",
+          "Name": "Category",
+          "Description": "The Category",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "566ef8149a2f486a908ac2329560110c",
+          "Name": "Elements",
+          "Description": "An element type.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Get all elements of the specified category from the model."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "baaebb48a5ef494aa517cdb97188eedc",
+      "End": "ee5415f7d4644d3297227c6d92a391fb",
+      "Id": "9ddf0995364d40f28f7e1f9ac4a70d1d"
+    },
+    {
+      "Start": "300ab253afe4424183b2a9369fc304cc",
+      "End": "08a1abb56fc947fca78624c2aadbcd15",
+      "Id": "69974b85b0894284928edbee50c3972f"
+    },
+    {
+      "Start": "566ef8149a2f486a908ac2329560110c",
+      "End": "a664162becbd4f2ab3a24f4bf8a2d09c",
+      "Id": "a75e0845b02e45b0b06e1d4dbadc1d00"
+    }
+  ],
+  "Dependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.1.0.7500",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Python  ProgressBar",
+        "Id": "e6ee9af23e4247f39fbd35d82b2ed3bf",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 676.5,
+        "Y": 260.75
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "File Path",
+        "Id": "23f445203efa4454aab452b45c2785a5",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 285.5,
+        "Y": 260.75
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Categories",
+        "Id": "d4b5f46a91b44b0c9ede78c72e9a8a72",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 68.5,
+        "Y": 503.75
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "All Elements of Category",
+        "Id": "068498f825504cdc9f65f23bb52fbe73",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 334.5,
+        "Y": 503.75
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "81d94d556a3549f9b406283cf9b669fd",
+        "Title": "Some test input",
+        "Nodes": [
+          "d4b5f46a91b44b0c9ede78c72e9a8a72",
+          "068498f825504cdc9f65f23bb52fbe73"
+        ],
+        "Left": 58.5,
+        "Top": 450.75,
+        "Width": 460.0,
+        "Height": 146.0,
+        "FontSize": 36.0,
+        "InitialTop": 503.75,
+        "InitialHeight": 123.0,
+        "TextblockHeight": 43.0,
+        "Background": "#FFFFFFFF"
+      },
+      {
+        "Id": "7355cff58eab46408c1f5727632d9c64",
+        "Title": "Browse to the location of the ProgressBar.dll",
+        "Nodes": [
+          "23f445203efa4454aab452b45c2785a5"
+        ],
+        "Left": 275.5,
+        "Top": 120.75,
+        "Width": 244.78333333333336,
+        "Height": 234.0,
+        "FontSize": 36.0,
+        "InitialTop": 260.75,
+        "InitialHeight": 124.0,
+        "TextblockHeight": 130.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": 0.0,
+    "Y": 0.0,
+    "Zoom": 1.0
+  }
+}
